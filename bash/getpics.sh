@@ -6,7 +6,7 @@
 #
 
 # Task 1: Improve this script to also retrieve and install the files kept in the https://zonzorp.net/pics.tgz tarfile
-#   - use the same kind of testing that is already in the script to only download the tarfile if you don't already have it and  to make sure the download and extraction commands work, then delete the local copy of the tarfile if the extraction was successful
+#   - use the sameP kind of testing that is already in the script to only download the tarfile if you don't already have it and  to make sure the download and extraction commands work, then delete the local copy of the tarfile if the extraction was successful
 
 # make a Pictures directory if we don't have one - assumes we have a home directory
 test -d ~/Pictures || mkdir ~/Pictures
@@ -25,6 +25,6 @@ test -d ~/Pictures && cat <<EOF
 Found $(find ~/Pictures -type f|wc -l) files in the Pictures directory.
 The Pictures directory uses $(du -sh ~/Pictures|awk '{print $1}') space on the disk.
 EOF
-if [ -f /etc/passwd ]then
+if [ -f /etc/passwd ]; then
 echo "mansi"
 fi
