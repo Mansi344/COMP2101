@@ -39,7 +39,7 @@ while [ $# -gt 0 ]; do
    echo 'You added "-d" for debug.'
    echo 'Processing the "-d".'
    case "$8" in
-   [1-5] )
+   [1-6] )
     echo "You added the -d for debug level $8."
     debugvar=$8
     shift
