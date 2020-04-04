@@ -9,47 +9,46 @@
 # TASK 3: Improve it by giving them 5 tries to get it right before failing
 #           *** Do not use the exit command, and do not use a loop (e.g. while or for)
 
-myString="TestString"
-referenceString="password"
-
-if [ $myString = $referenceString ]
-then
-	echo "Your guess was right"
-else
-	echo "Your guess is incorrect"	
-	echo "You have 4 chances left."
-	read myString
-
-	if [ $myString = $referenceString ]
-	then
-		echo "You Guessed Correct."
-	else
-		echo "3 Attempts left"	
-		echo "Your Password is incorrect."
-		read myString
-		  if [ $myString = $referenceString ]
-		  then
-			echo "You Guessed Correct."
-		  else
-			echo "Your guess was wrong"
-                        echo "2 Attempts left."
-                        read myString
-                           if [ $myString = $referenceString ]
-then
-	echo "Your guess was right"
-else
-	echo "1 Attempt left"	
-	echo "Your password was incorrect"
-	read myString
-                                     if [ $myString = $referenceString ]
-then
-	echo "Your guess was right"
-else
-	echo " YOU HAVE USED ALL THE ATTEMPTS"
-		fi
-	fi
+completed="String matching successful."
+fetalerror="Please try again."
+referenceString="Password"
+read -s -p "Enter the String:" myString
+echo
+if [ $myString = $referenceString ]; then
+  echo "$completed"
+  echo
+  else
+    echo "$fetalerror"
+    read -s -p "Enter the String:" myString
+    if [ $myString = $referenceString ]; then
+      echo "$completed"
+      echo
+    else
+      echo
+      echo "$fetalerror"
+      read -s -p "Enter the String:" myString
+    if [ $myString = $referenceString ]; then
+      echo "$completed"
+      echo
+    else
+      echo
+      echo "$fetalerror"
+	  read -s -p "Enter the String:" myString
+    if [ $myString = $referenceString ]; then
+      echo "$completed"
+      echo
+    else
+      echo
+      echo "$fetalerror"
+	  read -s -p "Enter the String:" myString
+    if [ $myString = $referenceString ]; then
+      echo "$completed"
+      echo
+    else
+      echo
+      echo "$fetalerror"
+	    fi
+	  fi
+    fi
+  fi
 fi
-
-[ $myString = $referenceString ] && echo "Your guesses leads to right password" || echo "You didn't get he password."
-
-EOF

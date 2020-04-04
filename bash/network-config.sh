@@ -13,7 +13,7 @@
 #         that put each command's output into variables. Once you have that done, Use those variables
 #         in the output section at the end of the script. If the commands included in this script
 #         don't make sense to you, feel free to create your own commands to find your ip addresses,
-#         host names, etc.
+#         host names, etc. #done
 
 # Task 2: Add variables for the default router's name and IP address.
 #         Add a name for the router's IP address to your /etc/hosts file.
@@ -30,18 +30,24 @@
 # finding external information relies on curl being installed and relies on live internet connection
 # awk is used to extract only the data we want displayed from the commands which produce extra data
 # this command is ugly done this way, so generating the output data into variables is recommended to make the script more readable.
-# e.g.
+# e.g. 
 #   interface_name=$(ip a |awk '/: e/{gsub(/:/,"");print $2}')
-HN=$(hostname)
-LANAddr=$(ip a s $(ip a |awk '/: e/{gsub(/:/,"");print $2}')|awk '/inet /{gsub(/\/.*/,"");print $2}')
-lH=$(getent hosts $(ip a s)) $lANAddr
-EL=$(curl -s icanhazip.com)
-EN=$(getent hosts $EL awk '{print $2}')
+
+myhostname=$(hostname)
+interface_name=$(ip a |awk '/: e/{gsub(/:/,"");print $2}')
+lan_ipaddress=$(ip a s $interface_name | awk '/inet /{gsub(/\/.*/,"");print $2}')
+lan_hostname=$(getent hosts $lan_ipaddress | awk '{print $2}')
+external_ip=$(curl -s icanhazip.com)
+external_name=$(getent hosts $external_ip | awk '{print $2}')
+router_address=$(route -n |grep 'UG[ \t]' | awk '{print $2}')
+default_router_name=$(route |grep "$router_address" | awk '{print $1}')
 
 cat <<EOF
-Hostname        : $HN
-LAN Address     : $lANddr
-LAN Hostname    : $lH
-External IP     : $EL
-External Name   : $EN
+Hostname        : $myhostname
+LAN Address     : $lan_ipaddress
+LAN Hostname    : $lan_hostname
+External IP     : $external_ip
+External Name   : $external_name
+Router Address  : $router_address
+Router Hostname : $default_router_name
 EOF
